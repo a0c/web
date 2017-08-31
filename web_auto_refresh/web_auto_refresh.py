@@ -82,4 +82,7 @@ def auto_refresh_kanban_list(model):
             cnt = action.search_count([('res_model', '=', model._name), ('auto_refresh', '>', '0')])
             if cnt > 0:
                 bus = model.env['bus.bus']
-                bus.sendone('auto_refresh_kanban_list', model._name)
+                for x in model:
+                    bus.sendone('auto_refresh_kanban_list', [model._name, x.id])
+                if not model:
+                    bus.sendone('auto_refresh_kanban_list', [model._name, False])

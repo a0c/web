@@ -9,12 +9,18 @@
                 if (typeof(active_view) != 'undefined'){   // in mail inbox page, no active view defined
                     var controller = this.action_manager.inner_widget.views[active_view].controller
                     var action = this.action_manager.inner_widget.action
+                    var id = message[1];
+                    message = message[0];
                     if ( action.auto_refresh>0 && active_view == "kanban" || active_view == "list"  &&
-                        controller.model == message  && ! controller.$buttons.hasClass('oe_editing')){
+                        controller.model == message  && ! controller.$buttons.hasClass('oe_editing') ||
+                        active_view == "form" && controller.model == message && controller.dataset.ids.indexOf(id) != -1){
                         if (active_view == "kanban"){
                             controller.do_reload();    // kanban view has do_reload
                         }
-                        else{
+                        else if (active_view == "form") {
+                            controller.reload();     // form view only has reload
+                        }
+                        else if (active_view == "list") {
                             controller.reload();     // list view only has reload
                         }
                     }
