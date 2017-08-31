@@ -5,6 +5,8 @@
             var self = this,
                 channel = "auto_refresh_kanban_list";
             this.bus_on(channel, function(message) {            // generic auto referesh
+                if (! this.action_manager.inner_widget)
+                    return;
                 var active_view = this.action_manager.inner_widget.active_view
                 if (typeof(active_view) != 'undefined'){   // in mail inbox page, no active view defined
                     var controller = this.action_manager.inner_widget.views[active_view].controller
