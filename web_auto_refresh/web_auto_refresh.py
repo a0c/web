@@ -32,8 +32,8 @@ class MailNotification(models.Model):
     def create(self, vals):
         res = super(MailNotification, self).create(vals)
         bus = self.env['bus.bus']
-        user_obj = self.env['res.users']
-        users = user_obj.search([('partner_id', '=', res.partner_id.id)])
+        user_obj = self.env['res.users'].sudo()
+        users = user_obj.search([('partner_id', '=', res.sudo().partner_id.id)])
         for user in users:
             bus.sendone(self._name, user.id)
         return res
