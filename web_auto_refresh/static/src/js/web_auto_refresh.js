@@ -31,6 +31,8 @@
             this.add_bus_channel(channel);
             channel = "mail.notification";
             this.bus_on(channel, function(message) {
+                if (! this.action_manager.inner_action)
+                    return;
                 var model  = this.action_manager.inner_action.res_model
                 var textarea = $('textarea.field_text')[0]  //check whether in mail compose mode
                 if (model === 'mail.message' && typeof(textarea)==='undefined'){
