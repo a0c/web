@@ -18,6 +18,7 @@ openerp.web_dialog_size= function (instance) {
         _extending: function() {
             var self = this;
             $(this).parents('.modal-dialog').addClass('dialog_full_screen');
+            $(this).parents('.modal-content').addClass('dialog_full_screen');
             $(this).addClass('dialog_button_hide');
 
             $(this).parents('.modal-dialog').find('.dialog_button_restore').removeClass('dialog_button_hide')
@@ -26,6 +27,7 @@ openerp.web_dialog_size= function (instance) {
         _restore: function() {
             var self = this;
             $(this).parents('.modal-dialog').removeClass('dialog_full_screen');
+            $(this).parents('.modal-content').removeClass('dialog_full_screen');
             $(this).addClass('dialog_button_hide');
 
             $(this).parents('.modal-dialog').find('.dialog_button_extend').removeClass('dialog_button_hide')
