@@ -2,7 +2,8 @@
 <templates id="template" xml:space="preserve">
     <t t-extend="Dialog">
         <t t-jquery="button" t-operation="after">
-             <button type="button" class="dialog_button_extend close">o</button>
+             <button type="button" class="dialog_button_extend close">O</button>
+             <button type="button" class="dialog_button_wide close">o</button>
              <button type="button" class="dialog_button_restore close">-</button>
         </t>
     </t>

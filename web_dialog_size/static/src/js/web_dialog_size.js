@@ -11,7 +11,12 @@ openerp.web_dialog_size= function (instance) {
             }
             else{
                 self.$dialog_box.find('.dialog_button_extend').on('click', self._extending);
+                self.$dialog_box.find('.dialog_button_wide').on('click', self._wide);
                 self.$dialog_box.find('.dialog_button_restore').on('click', self._restore);
+                if (this.dialog_options.start_large === 'wide')
+                    self.$dialog_box.find('.dialog_button_wide').click();
+                else if (this.dialog_options.start_large)
+                    self.$dialog_box.find('.dialog_button_extend').click();
             }
         },
 
@@ -19,18 +24,36 @@ openerp.web_dialog_size= function (instance) {
             var self = this;
             $(this).parents('.modal-dialog').addClass('dialog_full_screen');
             $(this).parents('.modal-content').addClass('dialog_full_screen');
+            $(this).parents('.modal-dialog').removeClass('dialog_wide_screen');
+            $(this).parents('.modal-content').removeClass('dialog_wide_screen');
             $(this).addClass('dialog_button_hide');
 
             $(this).parents('.modal-dialog').find('.dialog_button_restore').removeClass('dialog_button_hide')
+            $(this).parents('.modal-dialog').find('.dialog_button_wide').removeClass('dialog_button_hide')
+        },
+
+        _wide: function() {
+            var self = this;
+            $(this).parents('.modal-dialog').addClass('dialog_wide_screen');
+            $(this).parents('.modal-content').addClass('dialog_wide_screen');
+            $(this).parents('.modal-dialog').removeClass('dialog_full_screen');
+            $(this).parents('.modal-content').removeClass('dialog_full_screen');
+            $(this).addClass('dialog_button_hide');
+
+            $(this).parents('.modal-dialog').find('.dialog_button_extend').removeClass('dialog_button_hide');
+            $(this).parents('.modal-dialog').find('.dialog_button_restore').removeClass('dialog_button_hide');
         },
 
         _restore: function() {
             var self = this;
             $(this).parents('.modal-dialog').removeClass('dialog_full_screen');
             $(this).parents('.modal-content').removeClass('dialog_full_screen');
+            $(this).parents('.modal-dialog').removeClass('dialog_wide_screen');
+            $(this).parents('.modal-content').removeClass('dialog_wide_screen');
             $(this).addClass('dialog_button_hide');
 
             $(this).parents('.modal-dialog').find('.dialog_button_extend').removeClass('dialog_button_hide')
+            $(this).parents('.modal-dialog').find('.dialog_button_wide').removeClass('dialog_button_hide')
         },
 
     });

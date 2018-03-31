@@ -16,3 +16,7 @@
     width: calc(100% - 50px);
     height: calc(100% - 20px);
 }
+.dialog_wide_screen {
+    width: 1000px;
+    height: calc(100% - 20px);
+}
