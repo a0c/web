@@ -85,8 +85,14 @@ openerp.web_m2x_options = function (instance) {
                 // possible selections for the m2o
                 var values = _.map(data, function (x) {
                     x[1] = x[1].split("\n")[0];
+                    var last_char = search_val[search_val.length - 1], search_val_re = search_val;
+                    if (last_char === ' ' || last_char === '.' || last_char === '*')
+                        search_val_re = search_val_re.substring(0, search_val_re.length - 1);
+                    var regexp = new RegExp('(' + search_val_re + ')', 'gi'),
+                        classString = self.options.highlightClass !== undefined ? self.options.highlightClass : 'ui-autocomplete-highlight',
+                        label = _.str.escapeHTML(x[1]).replace(regexp, '<span class="' + classString + '">$1</span>');
                     return {
-                        label: _.str.escapeHTML(x[1]),
+                        label: label,
                         value: x[1],
                         name: x[1],
                         id: x[0],
